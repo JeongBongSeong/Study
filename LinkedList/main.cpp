@@ -6,8 +6,8 @@ using std::endl;
 
 int main()
 {
-	LinkedList<int> lList;
-	int iData;
+	LinkedList<char> lList;
+	char tData;
 	int iSelect;
 	while (1)
 	{
@@ -17,22 +17,22 @@ int main()
 		// exit
 		if (iSelect == -1)
 			break;
-
+		
 		// 항목 선택
 		switch (iSelect)
 		{
 		case 0:
 			system("cls");
 			cout << "input data(Create) : ";
-			cin >> iData;
-			lList.Create(iData);
+			cin >> tData;
+			lList.Create(tData);
 			system("cls");
 			break;
 		case 1:
 			system("cls");
 			cout << "input data(Delete) : ";
-			cin >> iData;
-			lList.Delete(iData);
+			cin >> tData;
+			lList.Delete(tData);
 			Sleep(1000);
 			system("cls");
 			break;

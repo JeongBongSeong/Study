@@ -8,12 +8,38 @@ using std::endl;
 
 template<typename T>
 LinkedList<T>::LinkedList()
-	:pHead(nullptr)
-	,pTail(nullptr)
+	:m_pHead(nullptr)
+	,m_pTail(nullptr)
+	,m_iCount(0)
 {
+}
+template<typename T>
+LinkedList<T>::~LinkedList()
+{
+	delete m_pHead;
+	delete m_pTail;
+	cout << "객체 해제" << endl;
+}
+template<typename T>
+void LinkedList<T>::AddCount()
+{
+	this->m_iCount++;
+}
+
+template<typename T>
+void LinkedList<T>::SubCount()
+{
+	this->m_iCount++;
 }
 
 
+template<typename T>
+int LinkedList<T>::Size()
+{
+	return this->m_iCount;
+
+
+}
 
 template<typename T>
 void LinkedList<T>::Create(T data)
@@ -23,8 +49,9 @@ void LinkedList<T>::Create(T data)
 		Node<T>* newNode = new Node<T>();
 		newNode->data = data;
 		newNode->next = nullptr;
-		this->pHead = newNode;
-		this->pTail = newNode;
+		this->m_pHead = newNode;
+		this->m_pTail = newNode;
+		this->AddCount();
 	}
 	else
 	{
@@ -32,8 +59,9 @@ void LinkedList<T>::Create(T data)
 		newNode->data = data;
 		newNode->next = nullptr;
 
-		this->pTail->next = newNode;
-		this->pTail = newNode;
+		this->m_pTail->next = newNode;
+		this->m_pTail = newNode;
+		this->AddCount();
 	}
 }
 
@@ -91,13 +119,13 @@ Node<T>* LinkedList<T>::Search(T data)
 		{
 			if (temp == nullptr)
 			{
-				if (this->pHead->data == data)
-					return this->pHead;
-				else if (this->pHead->next->data == data)
-					return this->pHead;
+				if (this->m_pHead->data == data)
+					return this->m_pHead;
+				else if (this->m_pHead->next->data == data)
+					return this->m_pHead;
 				else
 				{
-					temp = this->pHead->next;
+					temp = this->m_pHead->next;
 				}
 			}
 			else
@@ -131,8 +159,8 @@ void LinkedList<T>::Print()
 		{
 			if (temp == nullptr)
 			{
-				cout << i << "번째 노드 데이터 : " << this->pHead->data;
-				temp = this->pHead->next;
+				cout << i << "번째 노드 데이터 : " << this->m_pHead->data;
+				temp = this->m_pHead->next;
 			}
 			else
 			{
@@ -145,12 +173,27 @@ void LinkedList<T>::Print()
 		if (temp == nullptr)
 			break;
 	}
+	cout << "------------------------------" << endl;
 }
+
+template<typename T>
+void LinkedList<T>::Show()
+{
+	int i = 0;
+	for (Node<T>* temp = this->m_pHead; 
+		temp != nullptr; 
+		temp = temp->next)
+	{
+		cout << i << "번째 노드 데이터 : " << temp->data;
+		i++;
+	}
+}
+
 
 template<typename T>
 bool LinkedList<T>::IsEmpty()
 {
-	if (this->pHead == nullptr && this->pTail == nullptr)
+	if (this->m_pHead == nullptr && this->m_pTail == nullptr)
 		return true;
 	return false;
 }

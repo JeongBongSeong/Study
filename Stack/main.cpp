@@ -4,7 +4,7 @@ using namespace std;
 
 void Create();
 //void Destroy();
-void Enqueue(int);
+void Push(int);
 void Dequeue();
 void Top();
 bool IsEmpty();
@@ -38,7 +38,7 @@ int main() {
 		case 0:
 			cout << "push data :";
 			cin >> iData;
-			Enqueue(iData);
+			Push(iData);
 			break;
 		case 1:
 			Dequeue();
@@ -69,7 +69,7 @@ void Create()
 	g_iFront = 0;
 }
 
-void Enqueue(int data)
+void Push(int data)
 {
 	if (IsFull() == false)
 	{
@@ -115,10 +115,13 @@ bool IsFull()
 
 void Print()
 {
-	for (int i = 0; i < SIZE; i++)
+	if (IsEmpty() == false)
 	{
-		cout << g_iArray[i] << " ";
+		for (int i = 0; i < g_iFront; i++)
+		{
+			cout << g_iArray[i] << " ";
+		}
+		cout << endl;
 	}
-	cout << endl;
 
 }

@@ -6,7 +6,7 @@ void Create();
 //void Destroy();
 void Enqueue(int);
 void Dequeue();
-void Top();
+//void Top();
 bool IsEmpty();
 bool IsFull();
 void Print();
@@ -46,7 +46,7 @@ int main() {
 
 			break;
 		case 2:
-			Top();
+//			Top();
 			break;
 		case 3:
 			Print();
@@ -73,18 +73,21 @@ void Create()
 
 void Enqueue(int data)
 {
+	
 	if (IsFull() == false)
 	{
-		g_iArray[g_iFront++] = data;
+		g_iArray[g_iRear] = data;
+		g_iRear = (g_iRear + 1) % SIZE;
 	}
 }
+
 void Dequeue()
 {
 	if (IsEmpty() == false)
 	{
-		g_iFront--;
-		cout << "Pop Data : ";
+		cout << "Dequeue Data : ";
 		cout << g_iArray[g_iFront] << endl;
+		g_iFront = (g_iFront+1) % SIZE;
 	}
 }
 
@@ -97,12 +100,10 @@ bool IsEmpty()
 	}
 	else
 		return false;
-
 }
 bool IsFull()
 {
-
-	if (g_iFront == SIZE)
+	if (g_iFront == ((g_iRear+1)%SIZE))
 	{
 		cout << "is Full !!!" << endl;
 		return true;
@@ -113,9 +114,19 @@ bool IsFull()
 
 void Print()
 {
-	for (int i = 0; i < SIZE; i++)
+	int i = g_iFront;
+	if (IsEmpty() == false)
 	{
 		cout << g_iArray[i] << " ";
+		i = (i + 1) % SIZE;
+	}
+	else
+		return;
+
+	for (;i != (g_iRear+1)%SIZE;)
+	{
+		cout << g_iArray[i] << " ";
+		i = (i + 1) % SIZE;
 	}
 	cout << endl;
 
